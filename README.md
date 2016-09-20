@@ -10,8 +10,7 @@ Note: docker-compose also creates separate network. Each container created in st
 ## Steps
 
 1. `git clone`
-2. `cd SolrCloud-ZooKeeper-Docker`
-3. `./build.sh`
+2. `./build.sh`
 
 
 ## List of URLs:
