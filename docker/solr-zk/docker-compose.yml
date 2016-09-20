@@ -1,0 +1,84 @@
+version: '2'
+services:
+  zoo1:
+    container_name: zoo1
+    build:
+      context: .
+      dockerfile: Dockerfile-cloud-solr
+      args:
+        - nodeid=1
+    command: ./start.sh
+    environment:
+      - ZKID=1
+    tty: false
+    extra_hosts:
+      - "zoo1:172.16.238.11"
+      - "zoo2:172.16.238.12"
+      - "zoo3:172.16.238.13"
+    ports:
+      - "32961:8983"
+      - "2181"
+      - "2888"
+      - "3888"
+    networks:
+      solr_net:
+        ipv4_address: 172.16.238.11
+  zoo2:
+    container_name: zoo2
+    build:
+      context: .
+      dockerfile: Dockerfile-cloud-solr
+      args:
+        - nodeid=2
+    command: ./start.sh
+    environment:
+      - ZKID=2
+    tty: false
+    extra_hosts:
+      - "zoo1:172.16.238.11"
+      - "zoo2:172.16.238.12"
+      - "zoo3:172.16.238.13"
+    ports:
+      - "32962:8983"
+      - "2181"
+      - "2888"
+      - "3888"
+    networks:
+      solr_net:
+        ipv4_address: 172.16.238.12
+  zoo3:
+    container_name: zoo3
+    build:
+      context: .
+      dockerfile: Dockerfile-cloud-solr
+      args:
+        - nodeid=3
+    command: ./start.sh
+    environment:
+      - ZKID=3
+    tty: false
+    extra_hosts:
+      - "zoo1:172.16.238.11"
+      - "zoo2:172.16.238.12"
+      - "zoo3:172.16.238.13"
+    ports:
+      - "32963:8983"
+      - "2181"
+      - "2888"
+      - "3888"
+    networks:
+      solr_net:
+        ipv4_address: 172.16.238.13
+networks:
+  solr_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "true"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
+        gateway: 172.16.238.1
+      - subnet: 2001:3984:3989::/64
+        gateway: 2001:3984:3989::1
+
