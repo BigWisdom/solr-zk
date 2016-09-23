@@ -4,7 +4,7 @@ services:
     container_name: zoo1
     build:
       context: .
-      dockerfile: Dockerfile-cloud-solr
+      dockerfile: zk/Dockerfile-zk-solr
       args:
         - nodeid=1
     command: ./start.sh
@@ -16,7 +16,6 @@ services:
       - "zoo2:172.16.238.12"
       - "zoo3:172.16.238.13"
     ports:
-      - "32961:8983"
       - "2181"
       - "2888"
       - "3888"
@@ -27,7 +26,7 @@ services:
     container_name: zoo2
     build:
       context: .
-      dockerfile: Dockerfile-cloud-solr
+      dockerfile: zk/Dockerfile-zk-solr
       args:
         - nodeid=2
     command: ./start.sh
@@ -39,7 +38,6 @@ services:
       - "zoo2:172.16.238.12"
       - "zoo3:172.16.238.13"
     ports:
-      - "32962:8983"
       - "2181"
       - "2888"
       - "3888"
@@ -50,7 +48,7 @@ services:
     container_name: zoo3
     build:
       context: .
-      dockerfile: Dockerfile-cloud-solr
+      dockerfile: zk/Dockerfile-zk-solr
       args:
         - nodeid=3
     command: ./start.sh
@@ -62,13 +60,63 @@ services:
       - "zoo2:172.16.238.12"
       - "zoo3:172.16.238.13"
     ports:
-      - "32963:8983"
       - "2181"
       - "2888"
       - "3888"
     networks:
       solr_net:
         ipv4_address: 172.16.238.13
+  solr1:
+    container_name: solr1
+    build:
+      context: .
+      dockerfile: solr/Dockerfile-cloud-solr
+    command: ./start.sh
+    tty: false
+    extra_hosts:
+      - "zoo1:172.16.238.11"
+      - "zoo2:172.16.238.12"
+      - "zoo3:172.16.238.13"
+    ports:
+      - "32961:8983"
+      - "2181"
+    networks:
+      solr_net:
+        ipv4_address: 172.16.238.14
+  solr2:
+    container_name: solr2
+    build:
+      context: .
+      dockerfile: solr/Dockerfile-cloud-solr
+    command: ./start.sh
+    tty: false
+    extra_hosts:
+      - "zoo1:172.16.238.11"
+      - "zoo2:172.16.238.12"
+      - "zoo3:172.16.238.13"
+    ports:
+      - "32962:8983"
+      - "2181"
+    networks:
+      solr_net:
+        ipv4_address: 172.16.238.15
+  solr3:
+    container_name: solr3
+    build:
+      context: .
+      dockerfile: solr/Dockerfile-cloud-solr
+    command: ./start.sh
+    tty: false
+    extra_hosts:
+      - "zoo1:172.16.238.11"
+      - "zoo2:172.16.238.12"
+      - "zoo3:172.16.238.13"
+    ports:
+      - "32963:8983"
+      - "2181"
+    networks:
+      solr_net:
+        ipv4_address: 172.16.238.16
 networks:
   solr_net:
     driver: bridge

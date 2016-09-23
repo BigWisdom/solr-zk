@@ -1,4 +1,5 @@
 #!/bin/sh
-docker build -t search/solrcloud-zookeeper-docker:latest docker/solr-zk/.
-docker-compose -f docker/solr-zk/docker-compose.yml build
-docker-compose -f docker/solr-zk/docker-compose.yml up -d
+docker build -t search/solrcloud-docker:latest docker/solr/.
+docker build -t search/zookeeper-docker:latest docker/zk/.
+docker-compose -f docker/docker-compose.yml build
+docker-compose -f docker/docker-compose.yml up -d
