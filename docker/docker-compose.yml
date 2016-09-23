@@ -68,6 +68,10 @@ services:
         ipv4_address: 172.16.238.13
   solr1:
     container_name: solr1
+    depends_on:
+      - zoo1
+      - zoo2
+      - zoo3
     build:
       context: .
       dockerfile: solr/Dockerfile-cloud-solr
@@ -79,29 +83,34 @@ services:
       - "zoo3:172.16.238.13"
     ports:
       - "32961:8983"
-      - "2181"
     networks:
       solr_net:
         ipv4_address: 172.16.238.14
   solr2:
     container_name: solr2
+    depends_on:
+      - zoo1
+      - zoo2
+      - zoo3
     build:
       context: .
       dockerfile: solr/Dockerfile-cloud-solr
     command: ./start.sh
-    tty: false
-    extra_hosts:
+    tty: false    extra_hosts:
       - "zoo1:172.16.238.11"
       - "zoo2:172.16.238.12"
       - "zoo3:172.16.238.13"
     ports:
       - "32962:8983"
-      - "2181"
     networks:
       solr_net:
         ipv4_address: 172.16.238.15
   solr3:
     container_name: solr3
+    depends_on:
+      - zoo1
+      - zoo2
+      - zoo3
     build:
       context: .
       dockerfile: solr/Dockerfile-cloud-solr
@@ -113,7 +122,6 @@ services:
       - "zoo3:172.16.238.13"
     ports:
       - "32963:8983"
-      - "2181"
     networks:
       solr_net:
         ipv4_address: 172.16.238.16
