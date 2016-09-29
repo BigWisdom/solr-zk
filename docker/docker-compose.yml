@@ -75,6 +75,8 @@ services:
     build:
       context: .
       dockerfile: solr/Dockerfile-cloud-solr
+      args:
+        - zooid=1
     command: ./start.sh
     tty: false
     extra_hosts:
@@ -95,8 +97,11 @@ services:
     build:
       context: .
       dockerfile: solr/Dockerfile-cloud-solr
+      args:
+        - zooid=2
     command: ./start.sh
-    tty: false    extra_hosts:
+    tty: false
+    extra_hosts:
       - "zoo1:172.16.238.11"
       - "zoo2:172.16.238.12"
       - "zoo3:172.16.238.13"
@@ -114,6 +119,8 @@ services:
     build:
       context: .
       dockerfile: solr/Dockerfile-cloud-solr
+      args:
+        - zooid=3
     command: ./start.sh
     tty: false
     extra_hosts:

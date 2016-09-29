@@ -12,6 +12,7 @@ RUN\
 	apt-get clean
 RUN\
 	ln -s solr-$SOLR_VER solr &&\
+	mkdir solr-home &&\
 	mkdir solr-data &&\
-	cp /solr/server/solr/solr.xml /solr-data/.
+	cp /solr/server/solr/solr.xml /solr-home/.
 EXPOSE 8983

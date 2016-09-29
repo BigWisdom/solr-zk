@@ -57,6 +57,21 @@ docker-compose -f docker/docker-compose.yml up -d
 ##### Reove all images (Warning: This command will delete all images in your pc)
 `docker rm $(doccker images -q)`
 
+#### Volumes
+
+##### List all volumes
+`docker volume ls`
+
+##### Locating a volume
+`docker inspect <NAME>`
+
+##### OSX / Windows how see volumes
+`docker-machine ssh default`
+
+##### Reove all volumes (Warning: This command will delete all volumes in your pc)
+`docker volume rm $(docker volume ls -qf dangling=true)`
+
+
 
 ##### ZooKeeper utilities
 

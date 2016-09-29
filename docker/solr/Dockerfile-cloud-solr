@@ -1,10 +1,11 @@
 FROM search/solrcloud-docker
+ARG zooid=1
 RUN\
 	touch start.sh &&\
 	echo "#!/usr/bin/env bash" >> start.sh &&\
 	echo "./solr/bin/solr stop" >> start.sh &&\
-	echo "./solr/bin/solr -V -e techproducts -cloud -z zoo1:2181,zoo2:2181,zoo3:2181 -s /solr-data" >> start.sh &&\
-#	echo "./solr/server/scripts/cloud-scripts/zkcli.sh -cmd upconfig -z localhost:2181 -confname data_driven -confdir ./solr/server/solr/configsets/data_driven_schema_configs/conf" >> start.sh &&\
+	echo "./solr/bin/solr -V  -s /solr-home -a -Dsolr.data.dir=/solr-data -cloud -z zoo1:2181,zoo2:2181,zoo3:2181" >> start.sh &&\
+	echo "./solr/server/scripts/cloud-scripts/zkcli.sh -cmd upconfig -z zoo"${zooid}":2181 -confname data_driven -confdir ./solr/server/solr/configsets/data_driven_schema_configs/conf" >> start.sh &&\
 	echo "tail -F /solr/server/logs/solr.log" >> start.sh &&\
 	chmod 755 start.sh
 CMD	/bin/bash
