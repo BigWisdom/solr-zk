@@ -1,3 +1,8 @@
+# Docker installation
+INSTALL THE PLATFORM (docker terminal and kitematic)
+Install Docker with easy to use installers for the major desktop and cloud platforms.
+https://www.docker.com/products/docker-toolbox
+
 # Solr Cloud with ZooKeeper Ensemble
 This repo contains following
 
@@ -9,9 +14,11 @@ Note: docker-compose also creates separate network. Each container created in st
 
 ## Steps
 
-1. `git clone`
-2. `./build.sh`
-
+1. Start kitematic and start terminal (bottom left)
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+2. `git clone`
+3. `./build.sh`
+4. You should see 3 solr ans 3 zookeeper up and running
 
 ## List of URLs:
 
