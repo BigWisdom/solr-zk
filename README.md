@@ -14,11 +14,11 @@ Note: docker-compose also creates separate network. Each container created in st
 
 ## Steps
 
-1. Start kitematic and start terminal (bottom left)
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+1. Start kitematic and open docker cli (bottom left)
+![alt text](https://github.com/BigWisdom/solr-zk/raw/master/kitematic.png "Logo Title Text 1")
 2. `git clone`
 3. `./build.sh`
-4. You should see 3 solr ans 3 zookeeper up and running
+4. You should see 3 solr and 3 zookeeper up and running
 
 ## List of URLs:
 
